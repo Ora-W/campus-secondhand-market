@@ -1,0 +1,216 @@
+/* ============= 全局样式 · 校园二手交易市场 ============= */
+:root{
+  --brand:#35597f;
+  --brand-dark:#2a4866;
+  --brand-soft:#edf2f7;
+  --ink:#1d2129;
+  --muted:#6f7785;
+  --line:#e9ebef;
+  --bg:#f4f5f6;
+  --surface:#ffffff;
+  --surface-2:#f8f9fa;
+  --price:#9c4a3c;
+  --radius:14px;
+  --radius-sm:10px;
+  --shadow:0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.05);
+  --shadow-sm:0 1px 2px rgba(16,24,40,.04);
+  --fw-body:400;
+  --fw-strong:600;
+  --fw-title:700;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
+  font-weight:var(--fw-body);
+  font-size:14.5px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+#app{min-height:100vh}
+::selection{background:rgba(53,89,127,.16)}
+
+a{color:var(--brand);cursor:pointer;text-decoration:none;font-weight:500}
+a:hover{color:var(--brand-dark);text-decoration:underline}
+
+h1,h2,h3,h4{color:var(--ink);font-weight:var(--fw-title);letter-spacing:.1px;margin-top:0}
+h2{font-size:22px}
+h3{font-size:17px}
+
+/* 基础按钮：实色、克制，不使用渐变与发光 */
+button{
+  border:0;border-radius:var(--radius-sm);padding:9px 17px;background:var(--brand);color:#fff;
+  cursor:pointer;font-family:inherit;font-size:14px;font-weight:500;
+  transition:background .16s, box-shadow .16s;
+}
+button:hover:not(:disabled){background:var(--brand-dark)}
+button:active:not(:disabled){background:var(--brand-dark)}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible{outline:2px solid rgba(53,89,127,.35);outline-offset:2px}
+
+.btn-primary{background:var(--brand)}
+.btn-primary:hover:not(:disabled){background:var(--brand-dark)}
+.btn-ghost{background:var(--brand-soft);color:#3d4a5c}
+.btn-ghost:hover:not(:disabled){background:#e3e9f0;color:#28313d}
+.btn-danger{background:#b0473f}
+.btn-danger:hover:not(:disabled){background:#973a33}
+
+input,select,textarea{
+  border:1px solid transparent;border-radius:9px;padding:10px 13px;background:var(--surface-2);
+  font-family:inherit;font-size:14px;color:var(--ink);outline:none;
+  transition:background .16s, box-shadow .16s;
+}
+input::placeholder,textarea::placeholder{color:#8b93a1}
+input:focus,select:focus,textarea:focus{background:#fff;box-shadow:0 0 0 3px rgba(53,89,127,.12)}
+textarea{resize:vertical;font-family:inherit}
+/* 隐藏浏览器自带的密码显示按钮，避免和自定义眼睛重复 */
+input::-ms-reveal,input::-ms-clear{display:none}
+input[type=password]::-webkit-credentials-auto-fill-button{visibility:hidden;display:none !important}
+
+/* 布局 */
+.shell{max-width:1220px;margin:auto;padding:22px 24px 48px}
+header{
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+  background:var(--surface);
+  padding:15px 24px;border-radius:var(--radius);
+  box-shadow:var(--shadow);position:sticky;top:12px;z-index:60;
+}
+.brand{cursor:pointer;display:flex;flex-direction:column;gap:1px}
+.brand h1{
+  margin:0;font-size:21px;font-weight:var(--fw-title);letter-spacing:.2px;color:var(--ink);
+}
+.brand p{margin:0;color:var(--muted);font-size:12px;letter-spacing:.3px}
+.header-right{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.user-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--surface-2);padding:6px 13px;border-radius:99px;
+  font-size:13px;font-weight:500;color:#3d4a5c;
+}
+.user-tag .role{padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600}
+.user-tag .role.admin{background:#fbeaea;color:#9c3730}
+.user-tag .role.merchant{background:#fbf3e4;color:#8a5b1e}
+.user-tag .role.user{background:#e9f3ec;color:#2f6b4d}
+.user-tag .bal{color:var(--brand);font-weight:600;font-size:12px;margin-left:2px}
+
+.top-nav{display:flex;gap:6px;margin:20px 0;flex-wrap:wrap}
+.top-nav button{
+  background:transparent;color:#4b5563;padding:8px 15px;border-radius:9px;
+  font-weight:500;font-size:13.5px;
+}
+.top-nav button:hover:not(.active){background:var(--surface);color:var(--ink)}
+.top-nav button.active{
+  background:var(--brand-soft);color:var(--brand);font-weight:600;
+}
+
+.notice{
+  position:fixed;top:22px;left:50%;transform:translateX(-50%);
+  background:#2f4a3c;color:#fff;padding:11px 20px;border-radius:10px;
+  box-shadow:0 10px 30px rgba(16,24,40,.18);z-index:999;font-size:13.5px;
+  max-width:80vw;animation:notice-in .2s ease;
+}
+.notice.error{background:#9c3730}
+.notice.info{background:var(--brand)}
+@keyframes notice-in{from{opacity:0}to{opacity:1}}
+
+main{min-height:400px}
+footer{text-align:center;color:#a3aab5;padding:40px 0 12px;font-size:12px;letter-spacing:.4px}
+
+/* 通用卡片 / 面板：靠留白与阴影分层，不用边框分割 */
+.panel{
+  background:var(--surface);border-radius:var(--radius);padding:24px 26px;
+  box-shadow:var(--shadow);
+}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.empty{text-align:center;padding:52px 20px;color:#9aa1ac;font-size:14px}
+.sub{color:var(--muted);font-size:13px}
+
+/* 表格：用背景深浅区分行，不用分割线 */
+.tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px}
+.tbl th{
+  text-align:left;padding:11px 14px;background:var(--surface-2);color:#69727f;
+  font-weight:600;font-size:12.5px;letter-spacing:.2px;
+}
+.tbl th:first-child{border-radius:9px 0 0 9px}
+.tbl th:last-child{border-radius:0 9px 9px 0}
+.tbl td{padding:13px 14px;border:0;vertical-align:middle}
+.tbl tbody tr:nth-child(even){background:#fbfbfc}
+.tbl tbody tr:hover{background:var(--brand-soft)}
+
+/* 徽标 */
+.audit{display:inline-block;padding:3px 9px;border-radius:99px;font-size:11.5px;font-weight:600;background:#eef0f3;color:#5c6673}
+.audit.PENDING{background:#fbf3e4;color:#8a5b1e}
+.audit.APPROVED{background:#e9f3ec;color:#2f6b4d}
+.audit.REJECTED{background:#fbeaea;color:#9c3730}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;background:#eef0f3;color:#5c6673;font-size:11.5px;font-weight:500}
+
+/* 小按钮 */
+.sm{padding:6px 11px;border-radius:8px;font-size:12.5px;background:var(--brand-soft);color:#3d4a5c}
+.sm:hover:not(:disabled){background:#e2e9f0}
+.sm.ok{background:#e9f3ec;color:#2f6b4d}
+.sm.ok:hover:not(:disabled){background:#dcece1}
+.sm.danger{background:#fbeaea;color:#9c3730}
+.sm.danger:hover:not(:disabled){background:#f7dddd}
+.sm.warn{background:#fbf3e4;color:#8a5b1e}
+
+/* 滚动条 */
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:#cfd3da;border-radius:99px}
+::-webkit-scrollbar-thumb:hover{background:#b9bfc9}
+::-webkit-scrollbar-track{background:transparent}
+
+/* 移动端 */
+@media(max-width:700px){
+  .shell{padding:12px}
+  header{display:block;position:static;padding:16px}
+  .header-right{margin-top:14px}
+  .brand h1{font-size:19px}
+  .top-nav button{padding:8px 12px;font-size:12.5px}
+  .panel{padding:16px}
+  .tbl{font-size:12.5px}
+  .tbl th,.tbl td{padding:9px 8px}
+}
+
+/* ============= 暗色模式（跟随系统） ============= */
+@media (prefers-color-scheme: dark){
+  :root{
+    --brand:#8fb3d9;
+    --brand-dark:#a6c4e4;
+    --brand-soft:#232a33;
+    --ink:#e4e7ec;
+    --muted:#98a1ae;
+    --line:#2c323b;
+    --bg:#14171b;
+    --surface:#1c2026;
+    --surface-2:#232830;
+    --price:#d99a5b;
+    --shadow:0 1px 2px rgba(0,0,0,.25), 0 10px 28px rgba(0,0,0,.22);
+    --shadow-sm:0 1px 2px rgba(0,0,0,.25);
+    /* 暗色下字重降低一档，避免文字发虚 */
+    --fw-body:350;
+    --fw-strong:500;
+    --fw-title:600;
+  }
+  body{background:var(--bg);color:var(--ink)}
+  header,.panel,.card,.stat,.fund-box,.sub-tabs button,.auth-card,.auth-form,.main,.block,.modal,
+  .order-item,.cart-item,.log-item,.prod-row,.mp-card,.c-card,.reviews .review,.detail-grid > div,
+  .settings-grid > div,.review-row,.shop-box,.reply,.checkout-bar{background:var(--surface)!important}
+  .pending-block,.cancel-box{background:#2a2422!important}
+  .seller-row,.alert-bar{background:#232c38!important;color:#c7d3e1!important}
+  .alert-bar.danger{background:#332323!important;color:#e0b4b0!important}
+  .auth-form h2,.auth-form label{color:var(--ink)!important}
+  .auth-sub,.tip{color:var(--muted)!important}
+  .role-switch label{background:#262c34!important;color:#c9d2dd!important}
+  .role-switch label.active{background:#303845!important;color:#dbe6f2!important}
+  .tbl th{background:var(--surface-2)!important;color:var(--muted)!important}
+  .tbl tbody tr:nth-child(even){background:#1f242b}
+  .tbl tbody tr:hover{background:#262d36}
+  input,select,textarea{background:var(--surface-2)!important;color:var(--ink)!important}
+  input:focus,select:focus,textarea:focus{background:#2a3038!important}
+  .top-nav button.active{background:var(--brand-soft)!important;color:var(--brand)!important}
+  .user-tag{background:var(--surface-2)!important;color:var(--ink)!important}
+  .notice{box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  .order-item{border-color:var(--line)!important}
+  .status-tag{background:var(--surface-2)!important;color:var(--ink)!important}
+}
